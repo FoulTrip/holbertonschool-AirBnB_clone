@@ -7,8 +7,8 @@ Class Model
 import uuid
 from datetime import datetime
 import json
-from models.engine.file_storage import FileStorage
 
+from models.engine.file_storage import FileStorage
 storage = FileStorage()
 storage.reload()
 
@@ -63,7 +63,7 @@ class BaseModel:
         """
         Imprimo la instancia de BaseModel
         """
-        return f"[{self.__class__.__name__} ({self.id}) {self.__dict__}]"
+        return "[{} ({}) {}]".format(self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """
@@ -157,24 +157,24 @@ class BaseModel:
 
 # test 03
 
-if __name__ == "__main__":
-    # Crear una instancia de BaseModel y probar su funcionalidad
-    my_model = BaseModel()
-    my_model.name = "My First Model"
-    my_model.my_number = 89
-    my_model.save()
-    print(my_model)
+# if __name__ == "__main__":
+#     # Crear una instancia de BaseModel y probar su funcionalidad
+#     my_model = BaseModel()
+#     my_model.name = "My First Model"
+#     my_model.my_number = 89
+#     my_model.save()
+#     print(my_model)
 
-    # Crear una segunda instancia de BaseModel y probar su funcionalidad
-    my_model2 = BaseModel()
-    my_model2.name = "My Second Model"
-    my_model2.my_number = 42
-    my_model2.save()
-    print(my_model2)
+#     # Crear una segunda instancia de BaseModel y probar su funcionalidad
+#     my_model2 = BaseModel()
+#     my_model2.name = "My Second Model"
+#     my_model2.my_number = 42
+#     my_model2.save()
+#     print(my_model2)
 
-    # Imprimir todos los objetos almacenados en el almacenamiento de archivos
-    all_objs = my_model2.storage.all()
-    print("-- All objects --")
-    for obj_id in all_objs.keys():
-        obj = all_objs[obj_id]
-        print(obj)
+#     # Imprimir todos los objetos almacenados en el almacenamiento de archivos
+#     all_objs = my_model2.storage.all()
+#     print("-- All objects --")
+#     for obj_id in all_objs.keys():
+#         obj = all_objs[obj_id]
+#         print(obj)

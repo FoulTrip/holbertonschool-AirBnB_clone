@@ -26,9 +26,9 @@ class FileStorage:
         """
         Establece en __objects el objeto con la clave <obj class name>.id
         """
-        new_dict = {k: v.to_dict() for k, v in self.__objects.items()}
-        with open(self.__file_path, "w") as f:
-            json.dump(new_dict, f)
+        if obj:
+            key = "{}.{}".format(obj.__class__.__name__, obj.id)
+            self.__objects[key] = obj
 
     def save(self):
         """
@@ -46,10 +46,13 @@ class FileStorage:
         Deserializa el archivo JSON a __objects (solo si el archivo JSON existe; de lo contrario, no hace nada).
         Si el archivo no existe, no debe generar ninguna excepción.
         """
-        
-        with open(self.__file_path, "r") as f:
-            temp_dict = json.load(f)
-        for key, value in temp_dict.items():
+
+        try:
+            with open(FileStorage.__file_path, "r") as f:
+                temp_dict = json.load(f)
+            for key, value in temp_dict.items():
                 class_name = value["__class__"]
                 obj = eval(class_name)(**value)
-                self.__objects[key] = obj
+                FileStorage.__objects[key] = obj
+        except FileNotFoundError:
+            print("Error deserializando")
