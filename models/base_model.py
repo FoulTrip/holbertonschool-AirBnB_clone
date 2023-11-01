@@ -39,7 +39,7 @@ class BaseModel:
 
             # Si no se proporciona 'updated_at', establecerlo como la hora actual
             if "updated_at" not in kwargs:
-                self.update_at = datetime.now()
+                self.updated_at = datetime.now()
 
             # Si no se proporciona 'created_at', establecerlo como la hora actual
             if "created_at" not in kwargs:
@@ -63,14 +63,14 @@ class BaseModel:
         """
         Imprimo la instancia de BaseModel
         """
-        return "[{} ({}) {}]".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """
         Actualiza el atributo publico 'updated_at' con la fecha y hora actuales
         """
 
-        self.update_at = datetime.now()
+        self.updated_at = datetime.now()
         storage.save()
 
     def to_dict(self):
@@ -78,7 +78,7 @@ class BaseModel:
         Devuelve un diccionario que contiene todas las claves y valores de __dict__ de la instancia
         """
         new_dict = self.__dict__.copy()
-        new_dict["__class__"] = self.__class__.__name__
+        new_dict["__class__"] = type(self).__name__
 
         # Convertir 'created_at' y 'updated_at' a formato ISO y agregarlos al diccionario
         new_dict["created_at"] = self.created_at.isoformat()
@@ -127,7 +127,7 @@ class BaseModel:
 
 # test 01
 
-# if __name__ == "__main__":
+# # if __name__ == "__main__":
 #     # Prueba básica
 #     my_model = BaseModel()
 #     my_model.name = "My First Model"

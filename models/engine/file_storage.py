@@ -15,12 +15,13 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
-    def all(self):
+    @classmethod
+    def all(cls):
         """
         Devuelve el diccionario __objects
         """
 
-        return self.__objects
+        return cls.__objects
 
     def new(self, obj):
         """
@@ -34,12 +35,17 @@ class FileStorage:
         """
         Serializa __objects al archivo JSON
         """
+        try:
+            with open(self.__file_path, "r") as f:
+                temp_dict = json.load(f)
+        except FileNotFoundError:
+            temp_dict = {}
 
-        new_dict = {}
-        for key, value in FileStorage.__objects.items():
-            new_dict[key] = value.to_dict()
-        with open(FileStorage.__file_path, "w") as f:
-            json.dump(new_dict, f)
+        for key, value in self.__objects.items():
+            temp_dict[key] = value.to_dict()
+
+        with open(self.__file_path, "w") as f:
+            json.dump(temp_dict, f)
 
     def reload(self):
         """
@@ -48,11 +54,13 @@ class FileStorage:
         """
 
         try:
-            with open(FileStorage.__file_path, "r") as f:
+            with open(self.__file_path, "r") as f:
                 temp_dict = json.load(f)
             for key, value in temp_dict.items():
                 class_name = value["__class__"]
                 obj = eval(class_name)(**value)
-                FileStorage.__objects[key] = obj
+                self.__objects[key] = obj
         except FileNotFoundError:
-            print("Error deserializando")
+            print("El archivo no existe, imposible cargar datos")
+        except Exception as ex:
+            print(f"Error durante la carga: {ex}")
