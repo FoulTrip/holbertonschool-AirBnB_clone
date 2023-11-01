@@ -5,8 +5,6 @@
 """
 
 import json
-from datetime import datetime
-from models import storage
 
 
 class FileStorage:
@@ -21,6 +19,7 @@ class FileStorage:
         """
         Devuelve el diccionario __objects
         """
+
         return self.__objects
 
     def new(self, obj):
@@ -33,11 +32,14 @@ class FileStorage:
 
     def save(self):
         """
-        Actualiza el atributo publico 'updated_at' con la fecha y hora actuales
+        Serializa __objects al archivo JSON
         """
-        self.update_at = datetime.now()
-        storage.new(self)
-        storage.save()
+
+        new_dict = {}
+        for key, value in FileStorage.__objects.items():
+            new_dict[key] = value.to_dict()
+        with open(FileStorage.__file_path, "w") as f:
+            json.dump(new_dict, f)
 
     def reload(self):
         """

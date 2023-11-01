@@ -37,17 +37,17 @@ class BaseModel:
                     else:
                         setattr(self, key, value)
 
-                    # Si no se proporciona 'updated_at', establecerlo como la hora actual
-                    if "updated_at" not in kwargs:
-                        self.update_at = datetime.now()
+            # Si no se proporciona 'updated_at', establecerlo como la hora actual
+            if "updated_at" not in kwargs:
+                self.update_at = datetime.now()
 
-                    # Si no se proporciona 'created_at', establecerlo como la hora actual
-                    if "created_at" not in kwargs:
-                        self.created_at = datetime.now()
+            # Si no se proporciona 'created_at', establecerlo como la hora actual
+            if "created_at" not in kwargs:
+                self.created_at = datetime.now()
 
-                    # Si no se proporciona 'id', generar un UUID y convertirlo a string
-                    if "id" not in kwargs:
-                        self.id = str(uuid.uuid4())
+            # Si no se proporciona 'id', generar un UUID y convertirlo a string
+            if "id" not in kwargs:
+                self.id = str(uuid.uuid4())
 
         else:
             # Si no se proporcionan argumentos, generar un UUID y convertirlo a string
