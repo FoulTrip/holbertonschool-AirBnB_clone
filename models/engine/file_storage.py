@@ -26,9 +26,9 @@ class FileStorage:
         """
         Establece en __objects el objeto con la clave <obj class name>.id
         """
-        if obj:
-            key = "{}.{}".format(obj.__class__.__name__, obj.id)
-            self.__objects[key] = obj
+        new_dict = {k: v.to_dict() for k, v in self.__objects.items()}
+        with open(self.__file_path, "w") as f:
+            json.dump(new_dict, f)
 
     def save(self):
         """
@@ -48,11 +48,11 @@ class FileStorage:
         """
 
         try:
-            with open(FileStorage.__file_path, "r") as f:
+            with open(self.__file_path, "r") as f:
                 temp_dict = json.load(f)
             for key, value in temp_dict.items():
                 class_name = value["__class__"]
                 obj = eval(class_name)(**value)
-                FileStorage.__objects[key] = obj
+                self.__objects[key] = obj
         except FileNotFoundError:
-            print("Error deserializando")
+            print("No se encontró el archivo JSON")
