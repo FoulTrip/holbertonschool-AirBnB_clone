@@ -32,15 +32,16 @@ class HBNBCommand(cmd.Cmd):
         """
         Crea una nueva instancia de BaseModel, la guarda en el archivo JSON e imprime el id.
         """
-        args = arg.split()
-        if len(args) == 0:
+
+        if not arg:
             print("** class name missing **")
-        elif args[0] != "BaseModel":
-            print("** class doesn't exist **")
-        else:
-            new_instance = BaseModel()
+            return
+        try:
+            new_instance = eval(arg)()
             new_instance.save()
             print(new_instance.id)
+        except NameError:
+            print("** class doesn't exist **")
 
     def do_show(self, arg):
         """
@@ -66,15 +67,14 @@ class HBNBCommand(cmd.Cmd):
         """
         Prints all string representation of all instances based or not on the class name.
         """
-        all_objs = storage.all()
-        if len(arg) == 0:
-            print([str(all_objs[key]) for key in all_objs])
-        elif arg != "BaseModel":
+        if not arg:
+            obj_dict = storage.all()
+            print([str(obj_dict[key]) for key in obj_dict])
+        elif arg not in storage.all():
             print("** class doesn't exist **")
         else:
-            print(
-                [str(all_objs[key]) for key in all_objs if key.startswith("BaseModel")]
-            )
+            obj_dict = storage.all()
+            print([str(obj_dict[key]) for key in obj_dict if key.startswith(arg + ".")])
 
     def do_destroy(self, arg):
         """
@@ -126,6 +126,7 @@ class HBNBCommand(cmd.Cmd):
         Evitar la ejecución del comando anterior si se presiona enter sin comando.
         """
         pass
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()

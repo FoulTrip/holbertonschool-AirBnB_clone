@@ -46,13 +46,10 @@ class FileStorage:
         Deserializa el archivo JSON a __objects (solo si el archivo JSON existe; de lo contrario, no hace nada).
         Si el archivo no existe, no debe generar ninguna excepción.
         """
-
-        try:
-            with open(self.__file_path, "r") as f:
-                temp_dict = json.load(f)
-            for key, value in temp_dict.items():
+        
+        with open(self.__file_path, "r") as f:
+            temp_dict = json.load(f)
+        for key, value in temp_dict.items():
                 class_name = value["__class__"]
                 obj = eval(class_name)(**value)
                 self.__objects[key] = obj
-        except FileNotFoundError:
-            print("No se encontró el archivo JSON")
