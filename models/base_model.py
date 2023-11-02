@@ -9,6 +9,7 @@ from datetime import datetime
 import json
 
 from models.engine.file_storage import FileStorage
+
 storage = FileStorage()
 storage.reload()
 
@@ -120,61 +121,6 @@ class BaseModel:
         try:
             with open(filename, "r") as f:
                 obj_list = json.load(f)
-                return [cls.from_json_string(json.dumps(obj)) for obj in obj_list]
+                return [cls.from_dict(obj) for obj in obj_list]
         except FileNotFoundError:
             return []
-
-
-# test 01
-
-# # if __name__ == "__main__":
-#     # Prueba básica
-#     my_model = BaseModel()
-#     my_model.name = "My First Model"
-#     my_model.my_number = 89
-#     print(my_model)
-#     my_model.save()
-#     print(my_model.to_dict())
-
-# # test 02
-
-# if __name__ == "__main__":
-#     my_model = BaseModel()
-#     my_model.name = "My First Model"
-#     my_model.my_number = 89
-#     print(my_model)
-#     my_model.save()
-#     print(my_model)
-#     my_model_json = my_model.to_dict()
-#     print(my_model_json)
-#     print("JSON de my_model:")
-#     for key, value in my_model_json.items():
-#         print(f"\t{key}: ({type(value)}) - {value}")
-
-#     new_model = BaseModel.from_dict(my_model_json)
-#     print("\nRecreated Model:")
-#     print(new_model)
-
-# test 03
-
-# if __name__ == "__main__":
-#     # Crear una instancia de BaseModel y probar su funcionalidad
-#     my_model = BaseModel()
-#     my_model.name = "My First Model"
-#     my_model.my_number = 89
-#     my_model.save()
-#     print(my_model)
-
-#     # Crear una segunda instancia de BaseModel y probar su funcionalidad
-#     my_model2 = BaseModel()
-#     my_model2.name = "My Second Model"
-#     my_model2.my_number = 42
-#     my_model2.save()
-#     print(my_model2)
-
-#     # Imprimir todos los objetos almacenados en el almacenamiento de archivos
-#     all_objs = my_model2.storage.all()
-#     print("-- All objects --")
-#     for obj_id in all_objs.keys():
-#         obj = all_objs[obj_id]
-#         print(obj)

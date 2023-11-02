@@ -37,7 +37,15 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         try:
-            new_instance = eval(arg)()
+            if arg == "User":
+                from models.user import User
+
+                new_instance = User()
+            elif arg == "BaseModel":
+                from models.base_model import BaseModel
+
+                new_instance = BaseModel()
+
             new_instance.save()
             print(new_instance.id)
             storage.new(new_instance)
@@ -69,13 +77,13 @@ class HBNBCommand(cmd.Cmd):
         """
         Prints all string representation of all instances based or not on the class name.
         """
+        obj_dict = storage.all()
+
         if not arg:
-            obj_dict = storage.all()
             print([str(obj_dict[key]) for key in obj_dict])
-        elif arg not in storage.all():
+        elif not any(key.startswith(arg + ".") for key in obj_dict):
             print("** class doesn't exist **")
         else:
-            obj_dict = storage.all()
             print([str(obj_dict[key]) for key in obj_dict if key.startswith(arg + ".")])
 
     def do_destroy(self, arg):

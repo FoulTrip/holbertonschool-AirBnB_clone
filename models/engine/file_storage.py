@@ -35,17 +35,9 @@ class FileStorage:
         """
         Serializa __objects al archivo JSON
         """
-        try:
-            with open(self.__file_path, "r") as f:
-                temp_dict = json.load(f)
-        except FileNotFoundError:
-            temp_dict = {}
-
-        for key, value in self.__objects.items():
-            temp_dict[key] = value.to_dict()
 
         with open(self.__file_path, "w") as f:
-            json.dump(temp_dict, f)
+            json.dump({k: v.to_dict() for k, v in self.__objects.items()}, f)
 
     def reload(self):
         """
@@ -58,7 +50,12 @@ class FileStorage:
                 temp_dict = json.load(f)
             for key, value in temp_dict.items():
                 class_name = value["__class__"]
-                obj = eval(class_name)(**value)
+                if class_name == "BaseModel":
+                    from models.base_model import BaseModel
+                    obj = BaseModel(**value)
+                elif class_name == "User":
+                    from models.user import User
+                    obj = User(**value)
                 self.__objects[key] = obj
         except FileNotFoundError:
             print("El archivo no existe, imposible cargar datos")
