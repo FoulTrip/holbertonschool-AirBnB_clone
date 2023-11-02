@@ -1,1 +1,1 @@
-{}
+{"BaseModel.fb6941e5-1ab4-4890-9095-23e6144570a5": {"id": "fb6941e5-1ab4-4890-9095-23e6144570a5", "created_at": "2023-11-02T16:14:00.493066", "updated_at": "2023-11-02T16:23:39.153974", "email": "test03@mail.com", "__class__": "BaseModel"}, "User.8930c40b-dbc8-4d64-8e9e-822ba37242de": {"id": "8930c40b-dbc8-4d64-8e9e-822ba37242de", "created_at": "2023-11-02T16:14:06.319961", "updated_at": "2023-11-02T16:22:57.572717", "email": "test03@mail.com", "__class__": "User"}}

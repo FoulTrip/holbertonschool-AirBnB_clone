@@ -6,7 +6,6 @@
 
 import json
 
-
 class FileStorage:
     """
     Class FileStorage
@@ -16,12 +15,12 @@ class FileStorage:
     __objects = {}
 
     @classmethod
-    def all(cls):
+    def all(self):
         """
         Devuelve el diccionario __objects
         """
 
-        return cls.__objects
+        return self.__objects
 
     def new(self, obj):
         """

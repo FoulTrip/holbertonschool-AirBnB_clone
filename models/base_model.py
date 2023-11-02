@@ -7,11 +7,7 @@ Class Model
 import uuid
 from datetime import datetime
 import json
-
-from models.engine.file_storage import FileStorage
-
-storage = FileStorage()
-storage.reload()
+import models
 
 
 class BaseModel:
@@ -25,17 +21,15 @@ class BaseModel:
         """
 
         # Si se proporcionan argumentos con nombre, configurar los atributos correspondientes
-        if kwargs:
+        if kwargs != {}:
             for key, value in kwargs.items():
-                # Evito agregar el atributo '__class__' al objeto
+                # Si no se proporciona 'created_at', establecerlo como la hora actual
+                if key == "created_at" or key == "updated_at":
+                    # Convertir las cadenas de fecha y hora en objetos datetime
+                    timeObj = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                    setattr(self, key, timeObj)
+                    continue
                 if key != "__class__":
-                    # Si no se proporciona 'created_at', establecerlo como la hora actual
-                    if key == "created_at" or key == "updated_at":
-                        # Convertir las cadenas de fecha y hora en objetos datetime
-                        setattr(
-                            self, key, datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
-                        )
-                    else:
                         setattr(self, key, value)
 
             # Si no se proporciona 'updated_at', establecerlo como la hora actual
@@ -59,12 +53,14 @@ class BaseModel:
 
             # Establecer 'updated_at' como la hora actual
             self.updated_at = datetime.now()
+            
+            models.storage.new(self)
 
     def __str__(self):
         """
         Imprimo la instancia de BaseModel
         """
-        return "[{}] ({}) {}".format(type(self).__name__, self.id, self.__dict__)
+        return "[{:s}] ({:s}) {}".format(type(self).__name__, self.id, self.__dict__)
 
     def save(self):
         """
@@ -72,18 +68,18 @@ class BaseModel:
         """
 
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """
         Devuelve un diccionario que contiene todas las claves y valores de __dict__ de la instancia
         """
-        new_dict = self.__dict__.copy()
+        new_dict = dict(self.__dict__)
         new_dict["__class__"] = type(self).__name__
 
         # Convertir 'created_at' y 'updated_at' a formato ISO y agregarlos al diccionario
-        new_dict["created_at"] = self.created_at.isoformat()
-        new_dict["updated_at"] = self.updated_at.isoformat()
+        new_dict["created_at"] = new_dict["created_at"].isoformat()
+        new_dict["updated_at"] = new_dict["updated_at"].isoformat()
         return new_dict
 
     @classmethod
