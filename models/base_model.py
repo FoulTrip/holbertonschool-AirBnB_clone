@@ -15,7 +15,7 @@ class BaseModel:
     Define todos los atributos/métodos comunes para otras clases
     """
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, **kwargs):
         """
         Inicia la instancia de BaseModel
         """
