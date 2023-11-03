@@ -5,6 +5,11 @@ Consola para interactuar con el modelo
 
 import cmd
 from models.user import User
+from models.place import Place
+from models.amenity import Amenity
+from models.city import City
+from models.review import Review
+from models.state import State
 import models.base_model as s
 import models
 
@@ -41,9 +46,17 @@ class HBNBCommand(cmd.Cmd):
             if arg == "User":
                 new_instance = User()
             elif arg == "BaseModel":
-                from models.base_model import BaseModel
-
-                new_instance = BaseModel()
+                new_instance = s.BaseModel()
+            elif arg == "Amenity":
+                new_instance == Amenity()
+            elif arg == "City":
+                new_instance = City()
+            elif arg == "Place":
+                new_instance = Place()
+            elif arg == "Review":
+                new_instance == Review()
+            elif arg == "State":
+                new_instance == State()
 
             new_instance.save()
             print(new_instance.id)

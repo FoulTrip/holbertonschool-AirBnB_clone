@@ -7,5 +7,5 @@
 from models.base_model import BaseModel
 
 
-class User(BaseModel):
+class Amenity(BaseModel):
     name = ""
