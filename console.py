@@ -102,10 +102,13 @@ class HBNBCommand(cmd.Cmd):
         """
         Elimina una instancia basándose en el nombre de la clase y el id (guarda el cambio en el archivo JSON).
         """
+
+        classes = ["BaseModel", "User", "Place", "Review", "State", "Amenity", "City"]
+
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] != "BaseModel" or "User":
+        elif args[0] in ["BaseModel", "User", "Place", "Review", "State", "Amenity", "City"]:
             print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")

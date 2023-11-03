@@ -25,11 +25,5 @@
         "updated_at": "2023-11-03T00:03:24.716217",
         "email": "test@mail.com",
         "__class__": "User"
-    },
-    "Place.1baacb47-15ef-4149-8e36-8cccee12e8e9": {
-        "id": "1baacb47-15ef-4149-8e36-8cccee12e8e9",
-        "created_at": "2023-11-03T09:49:35.941222",
-        "updated_at": "2023-11-03T09:49:35.941222",
-        "__class__": "Place"
     }
 }
