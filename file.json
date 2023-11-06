@@ -1,1 +1,1 @@
-{"BaseModel.6bfdafaf-e1a5-450a-ae49-7260731203ed": {"id": "6bfdafaf-e1a5-450a-ae49-7260731203ed", "created_at": "2023-11-06T10:50:54.586469", "updated_at": "2023-11-06T10:50:54.586469", "update_at": "2023-11-06 10:50:54.586469", "__class__": "BaseModel"}, "User.f7420738-ac2b-4c56-afdb-6e658efbd9f3": {"id": "f7420738-ac2b-4c56-afdb-6e658efbd9f3", "created_at": "2023-11-06T10:51:07.020923", "updated_at": "2023-11-06T10:51:07.020923", "update_at": "2023-11-06 10:52:03.590851", "email": "\"David", "__class__": "User"}}
+{}
