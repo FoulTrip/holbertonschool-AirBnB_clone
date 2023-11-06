@@ -16,12 +16,12 @@ from models.review import Review
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
     class_list = [
-        "BaseModel", 
-        "User", 
-        "State", 
-        "City", 
-        "Amenity", 
-        "Place", 
+        "BaseModel",
+        "User",
+        "State",
+        "City",
+        "Amenity",
+        "Place",
         "Review"
     ]
 
