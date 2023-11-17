@@ -1,0 +1,102 @@
+.locations:first-child {
+  border-right: 1px solid #dddddd;
+  padding-left: 30px;
+}
+
+.locations {
+  padding-right: 30px;
+}
+
+.amenities {
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-right: 14em;
+}
+
+.filters {
+  background-color: #fff;
+  height: 70px;
+  width: 100%;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.search_btn {
+  font-size: 18px;
+  background-color: #ff5a5f;
+  color: #ffffff;
+  height: 48px;
+  width: 20%;
+  border: none;
+  border-radius: 4px;
+  margin-right: 30px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.search_btn:hover {
+  opacity: 0.9;
+}
+
+.locations,
+.amenities {
+  width: 25%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  justify-content: start;
+  position: relative; /* Agregado para el posicionamiento absoluto del popover */
+}
+
+.popover {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  left: 0;
+  transform: translate(0, 10px);
+  background-color: #fafafa; /* Actualizado a #FAFAFA según las especificaciones */
+  padding: 1.5rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  width: 100%; /* Actualizado a 100% para que tenga el mismo ancho que el div del filtro */
+  border: 1px solid #dddddd; /* Agregado según las especificaciones */
+  border-radius: 4px; /* Agregado según las especificaciones */
+  list-style-type: none; /* Agregado para eliminar los puntos de la lista */
+  max-width: calc(
+    100% - 2 * 1.5rem
+  ); /* Agregado para ajustar el ancho al de .locations */
+}
+
+.popover:before {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  right: calc(50% - 10px);
+  top: 30px;
+  border-style: solid;
+  border-width: 0 10px 10px 10px;
+  border-color: transparent transparent #fafafa transparent; /* Actualizado a #FAFAFA según las especificaciones */
+  transition-duration: 0.3s;
+  transition-property: transform;
+}
+
+.locations:hover .popover, /* Actualizado para mostrar el popover cuando se pasa el mouse sobre .locations */
+.amenities:hover .popover {
+  /* Agregado para mostrar el popover cuando se pasa el mouse sobre .amenities */
+  z-index: 10;
+  opacity: 1;
+  visibility: visible;
+  transform: translate(0, 70px);
+  transition: all 0.5s cubic-bezier(0.75, -0.02, 0.2, 0.97);
+}
+
+h3 {
+  font-weight: 600;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 14px;
+}

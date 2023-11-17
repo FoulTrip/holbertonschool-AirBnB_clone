@@ -1,0 +1,50 @@
+.locations:first-child {
+  border-right: 1px solid #dddddd;
+  padding-left: 30px;
+}
+
+.filters {
+  background-color: #fff;
+  height: 70px;
+  width: 100%;
+  border: 1px solid #dddddd;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search_btn {
+  font-size: 18px;
+  background-color: #ff5a5f;
+  color: #ffffff;
+  height: 48px;
+  width: 20%;
+  border: none;
+  border-radius: 4px;
+  margin-right: 30px;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+.search_btn:hover {
+  opacity: 0.9;
+}
+
+.locations, .amenities {
+  width: 25%;
+  height: 100%;
+  display: grid;
+  place-content: center;
+  justify-content: start;
+}
+
+h3 {
+  font-weight: 600;
+}
+
+h4 {
+  font-weight: 400;
+  font-size: 14px;
+} 
