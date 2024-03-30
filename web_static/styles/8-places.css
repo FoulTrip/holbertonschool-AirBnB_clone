@@ -96,7 +96,7 @@
 }
 
 .group_icon {
-  background-image: url("../images/icon_group.png");
+  background-image: url("../images/max_guest.png");
   background-repeat: no-repeat;
   background-position: center;
   display: inline-block;
@@ -106,7 +106,7 @@
 }
 
 .bed_icon {
-  background-image: url("../images/icon_bed.png");
+  background-image: url("../images/number_rooms.png");
   background-repeat: no-repeat;
   background-position: center;
   display: inline-block;
@@ -116,7 +116,7 @@
 }
 
 .bath_icon {
-  background-image: url("../images/icon_bath.png");
+  background-image: url("../images/number_bathrooms.png");
   background-repeat: no-repeat;
   background-position: center;
   display: inline-block;
